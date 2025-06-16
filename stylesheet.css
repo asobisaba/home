@@ -1,0 +1,87 @@
+body {
+  background-color: rgb(231, 255, 97);
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+  background-image: url(haikei.png);
+  top: 0;
+}
+
+header img {
+  margin: 10px 10px;
+  top: 50px;
+}
+
+.link {
+  background-color: rgb(250, 246, 35);
+  padding: 30px;
+}
+
+.link a {
+  list-style: none;
+  padding: 30px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+  color: black;
+}
+
+.link a:hover {
+  background-color: rgb(212, 210, 45);
+}
+
+.scratch h1 {
+  font-size: 25px;
+}
+
+.kadou {
+  background-color: rgb(251, 255, 131);
+  padding: 10px 50px;
+  text-align: center;
+  font-weight: bold;
+  background-size: 70px 70%;
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sankahouhou button {
+  background-color: rgb(255, 224, 48);
+  padding: 10px 20px;
+  margin: 20px;
+}
+
+.accordion-header {
+  background-color: #fffd7d;
+  padding: 15px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+        
+.accordion-content {
+  max-height: 0; /* 最初は隠す */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out; /* なめらかに開閉 */
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+  /* 開いている状態 */
+  .accordion-header.active + .accordion-content {
+  max-height: 100px; /* 十分な高さを設定（コンテンツに合わせて調整） */
+  padding: 15px; /* 開いた時にパディングを追加 */
+  background-color: #f5f258;
+}

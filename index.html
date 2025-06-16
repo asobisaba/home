@@ -1,0 +1,116 @@
+<!DOCTYPE html> 
+<head>
+    <title>遊び鯖</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="logo.png">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+ </head>
+<body>
+<header>
+    <a href="https://github.com/asobisaba/home"><img src="logo.png"></a>
+</header>
+<div class="link">
+<a href="https://discord.gg/aqUhFnW4GH"><i class="fab fa-discord"></i> discord</a>
+<a href="https://asobisaba.github.io/rule/"><i>ルール</i></a>
+<a href="#"><i class="fab fa-gamepad-modern"></i>game</a>
+</div>
+<div class="main">
+    <h1>遊び鯖サイト開設！</h1>
+    <p>このサイトでは遊び鯖に関するのを配信します</p>
+</div>
+<div class="scratch">
+    <a href="https://scratch.mit.edu/users/mikky0929/">管理主のscratchアカウント</a>
+    <a href="https://scratch.mit.edu/users/asobisaba_scratch/">遊び鯖のscratchアカウント</a>
+    <h1>最近のscratchの作品</h1>
+</div>
+<h3>参加方法</h3>
+<div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">java版</div>
+        <div class="accordion-content">
+            <p>マルチプレイ→サーバーを追加</p>
+            <p>サーバーアドレス: kaisaba.f5.si</p>
+            <p>サーバー名はなんでもok</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">BE版</div>
+        <div class="accordion-content">
+            <p>サーバーアドレス:kaisaba.f5.si</p>
+            <p>ポート:19132</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">switch(BE)版</div>
+        <div class="accordion-content">
+            <p>フレンド追加:sukukai</p>
+            <p>switch以外でもBEでもその参加方法は可能です！！</p>
+        </div>
+    </div>
+<div class="kadou">
+    <h1>マイクラサーバー稼働状況</h1>
+    <p class="info">サーバー: <span id="server-address"></span></p>
+    <div id="server-status" class="loading">
+        確認中...
+    </div>
+    <p class="info" id="last-updated"></p>
+</div>
+<script>
+        // ここをあなたのMinecraftサーバーのIPアドレスまたはドメイン名に置き換えてください
+        const MINECRAFT_SERVER_ADDRESS = "kaisaba.f5.si";
+        // Minecraftのデフォルトポートは25565です。もし異なる場合は変更してください。
+        const MINECRAFT_SERVER_PORT = "25565"; // 例: 25565
+
+        const statusDisplay = document.getElementById('server-status');
+        const serverAddressDisplay = document.getElementById('server-address');
+        const lastUpdatedDisplay = document.getElementById('last-updated');
+
+        // 表示するサーバーアドレスを設定
+        serverAddressDisplay.textContent = `${MINECRAFT_SERVER_ADDRESS}:${MINECRAFT_SERVER_PORT}`;
+
+        async function checkServerStatus() {
+            statusDisplay.textContent = '確認中...';
+            statusDisplay.className = 'loading';
+            lastUpdatedDisplay.textContent = ''; // 更新中なのでクリア
+
+            // api.mcsrvstat.us のAPIエンドポイント
+            const apiUrl = `https://api.mcsrvstat.us/2/${MINECRAFT_SERVER_ADDRESS}:${MINECRAFT_SERVER_PORT}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.online) {
+                    statusDisplay.textContent = 'オンライン';
+                    statusDisplay.className = 'online';
+                } else {
+                    statusDisplay.textContent = 'オフライン';
+                    statusDisplay.className = 'offline';
+                }
+            } catch (error) {
+                console.error('サーバー稼働状況の取得中にエラーが発生しました:', error);
+                statusDisplay.textContent = '取得エラー';
+                statusDisplay.className = 'offline'; // エラー時もオフラインとして表示
+            } finally {
+                const now = new Date();
+                lastUpdatedDisplay.textContent = `最終更新: ${now.toLocaleTimeString('ja-JP')} ${now.toLocaleDateString('ja-JP')}`;
+            }
+        }
+
+        function toggleAccordion(header) {
+            header.classList.toggle("active"); // ヘッダーにactiveクラスを付け外し
+            const content = header.nextElementSibling; // ヘッダーの次の要素（コンテンツ）を取得
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null; // 閉じている場合は開く
+                content.style.padding = '0 15px'; // 閉じるときはパディングを元に戻す
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px"; // 開いている場合は閉じる
+                content.style.padding = '15px'; // 開くときにパディングを設定
+            }
+
+        }
+</script>
+</body>
+</html>
